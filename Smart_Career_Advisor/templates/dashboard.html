@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Smart Career Advisor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/dashboard.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="/" class="sidebar-brand">
+                    <span class="brand-icon">🎓</span>
+                    <span>Career Advisor</span>
+                </a>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" onclick="showPage('auth')">
+                    <span class="nav-icon">🔐</span>
+                    <span>Login / Register</span>
+                </a>
+                <a href="#" class="nav-item" onclick="showPage('assessment')" id="navAssessment">
+                    <span class="nav-icon">📝</span>
+                    <span>Assessments</span>
+                </a>
+                <a href="#" class="nav-item" onclick="showPage('results')" id="navResults">
+                    <span class="nav-icon">📊</span>
+                    <span>Results</span>
+                </a>
+                <a href="#" class="nav-item" onclick="showPage('learning')" id="navLearning">
+                    <span class="nav-icon">📚</span>
+                    <span>Learning Path</span>
+                </a>
+                <a href="#" class="nav-item" onclick="showPage('colleges')" id="navColleges">
+                    <span class="nav-icon">🏫</span>
+                    <span>Colleges</span>
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button onclick="logout()" class="btn-logout" id="logoutBtn" style="display:none;">
+                    <span>🚪</span> Logout
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="topbar">
+                <h1 id="pageTitle">Welcome</h1>
+                <div class="user-info" id="userInfo" style="display:none;">
+                    <span class="user-avatar">👤</span>
+                    <span id="userName"></span>
+                </div>
+            </div>
+
+            <div class="content-area">
+                <!-- Auth Page -->
+                <div id="authPage" class="page active">
+                    <div class="auth-container">
+                        <div class="auth-card">
+                            <div class="auth-tabs">
+                                <button class="auth-tab active" onclick="switchAuth('login')">Login</button>
+                                <button class="auth-tab" onclick="switchAuth('register')">Register</button>
+                            </div>
+                            
+                            <div id="loginForm" class="auth-form">
+                                <div class="form-group">
+                                    <label>Username</label>
+                                    <input type="text" id="loginUsername" placeholder="Enter username">
+                                </div>
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input type="password" id="loginPassword" placeholder="Enter password">
+                                </div>
+                                <button onclick="login()" class="btn-submit">Sign In</button>
+                                <p id="loginError" class="error-msg"></p>
+                            </div>
+                            
+                            <div id="registerForm" class="auth-form" style="display:none;">
+                                <div class="form-group">
+                                    <label>Username</label>
+                                    <input type="text" id="regUsername" placeholder="Choose username">
+                                </div>
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email" id="regEmail" placeholder="Enter email">
+                                </div>
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input type="password" id="regPassword" placeholder="Create password">
+                                </div>
+                                <div class="form-group">
+                                    <label>Confirm Password</label>
+                                    <input type="password" id="regConfirm" placeholder="Confirm password">
+                                </div>
+                                <button onclick="register()" class="btn-submit">Create Account</button>
+                                <p id="registerError" class="error-msg"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Assessment Page -->
+                <div id="assessmentPage" class="page">
+                    <div class="page-header">
+                        <h2>Career Assessments</h2>
+                        <p>Complete tests to discover your ideal career path</p>
+                    </div>
+                    
+                    <div class="test-tabs">
+                        <button class="test-tab active" onclick="switchTest('aptitude')">Aptitude Test</button>
+                        <button class="test-tab" onclick="switchTest('riasec')">RIASEC Test</button>
+                    </div>
+                    
+                    <div id="aptitudeTest" class="test-content">
+                        <div id="aptitudeQuestions"></div>
+                        <button onclick="submitAptitude()" class="btn-submit">Submit Aptitude Test</button>
+                    </div>
+                    
+                    <div id="riasecTest" class="test-content" style="display:none;">
+                        <div class="test-info">Rate each statement from 1 (Strongly Disagree) to 5 (Strongly Agree)</div>
+                        <div id="riasecQuestions"></div>
+                        <button onclick="submitRiasec()" class="btn-submit">Submit RIASEC Test</button>
+                    </div>
+                </div>
+
+                <!-- Results Page -->
+                <div id="resultsPage" class="page">
+                    <div class="page-header">
+                        <h2>Your Results</h2>
+                        <p>View your assessment results and recommendations</p>
+                    </div>
+                    <div id="resultsContent"></div>
+                </div>
+
+                <!-- Learning Page -->
+                <div id="learningPage" class="page">
+                    <div class="page-header">
+                        <h2>Learning Path</h2>
+                        <p>Track your progress and complete modules</p>
+                    </div>
+                    <div id="learningContent"></div>
+                </div>
+
+                <!-- Colleges Page -->
+                <div id="collegesPage" class="page">
+                    <div class="page-header">
+                        <h2>College Recommendations</h2>
+                        <p>Find the best colleges based on your profile</p>
+                    </div>
+                    
+                    <div class="college-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Your Cutoff Score</label>
+                                <input type="number" id="cutoff" min="0" max="200" step="0.1" placeholder="Enter cutoff">
+                            </div>
+                            <div class="form-group">
+                                <label>Category</label>
+                                <select id="category">
+                                    <option value="OC">OC</option>
+                                    <option value="BC">BC</option>
+                                    <option value="BCM">BCM</option>
+                                    <option value="MBC">MBC</option>
+                                    <option value="SC">SC</option>
+                                    <option value="SCA">SCA</option>
+                                    <option value="ST">ST</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Preferred Branch</label>
+                                <select id="branch">
+                                    <option value="CSE">Computer Science</option>
+                                    <option value="IT">Information Technology</option>
+                                    <option value="ECE">Electronics</option>
+                                    <option value="MECH">Mechanical</option>
+                                    <option value="CIVIL">Civil</option>
+                                    <option value="EEE">Electrical</option>
+                                    <option value="AI">Artificial Intelligence</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button onclick="getRecommendations()" class="btn-submit">Get Recommendations</button>
+                    </div>
+                    
+                    <div id="collegeResults"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

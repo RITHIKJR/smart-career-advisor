@@ -1,0 +1,45 @@
+======================================================================
+ML MODEL EVALUATION REPORT
+Smart Career Advisor - College Recommendation System
+======================================================================
+
+PERFORMANCE METRICS
+======================================================================
+Accuracy:              91.91%
+Precision:             88.13%
+Recall (Sensitivity):  100.00%
+F1 Score:              93.69%
+
+CONFUSION MATRIX
+======================================================================
+                    Predicted
+                No (0)      Yes (1)
+Actual  No (0)  3522        893       
+        Yes (1) 0           6630      
+
+CONFUSION MATRIX BREAKDOWN
+======================================================================
+True Negatives (TN):    3522
+False Positives (FP):    893
+False Negatives (FN):      0
+True Positives (TP):    6630
+
+DETAILED CLASSIFICATION REPORT
+======================================================================
+                  precision    recall  f1-score   support
+
+No Admission (0)       1.00      0.80      0.89      4415
+   Admission (1)       0.88      1.00      0.94      6630
+
+        accuracy                           0.92     11045
+       macro avg       0.94      0.90      0.91     11045
+    weighted avg       0.93      0.92      0.92     11045
+
+======================================================================
+METRICS EXPLANATION
+======================================================================
+
+1. ACCURACY (91.91%): Overall correctness
+2. PRECISION (88.13%): Reliability of positive predictions
+3. RECALL (100.00%): Coverage of actual positives
+4. F1 SCORE (93.69%): Balanced performance metric

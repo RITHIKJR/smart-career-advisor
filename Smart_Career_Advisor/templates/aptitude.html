@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aptitude Test - Smart Career Advisor</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="top-nav">
+        <div class="nav-brand">🎓 Smart Career Advisor</div>
+        <button onclick="window.location.href='/dashboard'" class="btn-home">← Back to Dashboard</button>
+    </div>
+
+    <div class="container">
+        <h1>Aptitude Assessment</h1>
+        <p style="text-align: center; color: #6b7280; margin-bottom: 30px;">
+            Test your logical reasoning and problem-solving skills (10 Questions)
+        </p>
+
+        <div id="aptitudeQuestions"></div>
+        
+        <button onclick="submitAptitude()" class="btn-submit" style="margin-top: 30px; width: 100%;">
+            Submit Aptitude Test
+        </button>
+    </div>
+
+    <script src="/static/assessment.js"></script>
+</body>
+</html>
